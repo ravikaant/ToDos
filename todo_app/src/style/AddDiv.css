@@ -1,0 +1,25 @@
+div {
+    margin-right: -1;
+    height: 5vh;
+    width: 80%;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 4vh;
+}
+
+textarea {
+    width: 80%;
+    height: 100%;
+    border: 1px solid tomato;
+    border-radius: 2px;
+    font-size: 20px;
+}
+button {
+    height: 100%;
+    width: 10%;
+    margin-left: 2%;
+
+    color: white;
+    background-color: tomato;
+    border-radius: 10px;
+}
