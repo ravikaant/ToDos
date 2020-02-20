@@ -1,5 +1,4 @@
 import React from "react";
-import "../style/tasks.css";
 
 function Tasks(props) {
     let displayTasks = [];
@@ -14,21 +13,22 @@ function Tasks(props) {
 
     return (
         <React.Fragment>
-            <ul id="todoList">
+            <ul className="tasklist" id="todoList">
                 {displayTasks.map(task => (
                     <li
+                        className="task"
                         key={task.id}
                         className={
                             task.status === "INCOMPLETE"
-                                ? "incompleteTodoItem"
-                                : "completedTodoItem"
+                                ? "task incomplete"
+                                : "task complete"
                         }
                         onClick={() => props.toggleTask(task)}
                     >
                         <div className="todoContainer">{task.name}</div>
 
                         <button
-                            className="delTodo"
+                            className="delete"
                             onClick={ev => props.onDelete(task.id, ev)}
                         >
                             X

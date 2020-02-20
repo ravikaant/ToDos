@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './App.css';
+import './App.scss';
 import AddTask from './components/addTask'
 import Tasks from './components/tasks';
 
@@ -79,10 +79,10 @@ class App extends Component {
       <div className='body'>
         <AddTask onAdd={this.onInputHandler} />
         <Tasks toggleTask={this.onToggleComplete} onDelete={this.deleteTodo} tasks={this.state.tasks} view={this.state.view} />
-        <div className="buttonContainer">
-          <button onClick={this.defaultView}>All Tasks</button>
-          <button onClick={this.incompleteTasksView}>Incomplete Tasks</button>
-          <button onClick={this.completedTasksView}>Completed Tasks</button>
+        <div className="filters">
+          <button className='filter' onClick={this.defaultView}>All Tasks</button>
+          <button className='filter' onClick={this.incompleteTasksView}>Incomplete Tasks</button>
+          <button className='filter' onClick={this.completedTasksView}>Completed Tasks</button>
         </div>
       </div >
     );

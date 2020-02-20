@@ -1,11 +1,11 @@
 import React from "react";
-import "../style/AddDiv.css";
 
 function AddTask(props) {
     return (
-        <div>
-            <textarea id="todo" rows="5"></textarea>
+        <div className="taskinput">
+            <textarea id="todo" className="input" rows="5"></textarea>
             <button
+                className="submit"
                 onClick={() => {
                     props.onAdd(document.getElementById("todo").value);
                     document.getElementById("todo").value = "";
