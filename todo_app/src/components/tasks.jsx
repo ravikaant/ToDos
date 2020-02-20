@@ -1,15 +1,25 @@
-import React, { Component } from "react";
+import React from "react";
 import "../style/tasks.css";
 
 function Tasks(props) {
+    let displayTasks = [];
+
+    if (props.view === "ALL") {
+        displayTasks = [...props.tasks];
+    } else if (props.view === "COMPLETE") {
+        displayTasks = props.tasks.filter(task => task.status === "COMPLETE");
+    } else {
+        displayTasks = props.tasks.filter(task => task.status === "INCOMPLETE");
+    }
+
     return (
         <React.Fragment>
             <ul id="todoList">
-                {props.tasks.map(task => (
+                {displayTasks.map(task => (
                     <li
                         key={task.id}
                         className={
-                            task.status == 0
+                            task.status === "INCOMPLETE"
                                 ? "incompleteTodoItem"
                                 : "completedTodoItem"
                         }

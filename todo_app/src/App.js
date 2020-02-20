@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import AddTask from './components/addTask'
 import Tasks from './components/tasks';
@@ -10,95 +9,76 @@ class App extends Component {
       {
         id: '1',
         name: 'Completed Task',
-        status: 1,
+        status: 'COMPLETE',
       },
       {
         id: '2',
         name: 'Incomplete Task',
-        status: 0,
+        status: 'INCOMPLETE',
       },
     ],
     lastIndex: 2,
-    displayTasks: [
-      {
-        id: '1',
-        name: 'Completed Task',
-        status: 1,
-      },
-      {
-        id: '2',
-        name: 'Incomplete Task',
-        status: 0,
-      },
-    ],
-    view: 0
+    view: 'ALL'
   };
 
-  onToggleComplete = (task) => {
-    console.log(task);
-    const tasks = [...this.state.tasks];
-    const index = tasks.indexOf(task);
-    task.status = 1 ^ task.status;
-    tasks[index] = { ...task };
+  onToggleComplete = (toggleTask) => {
+    console.log(toggleTask);
+    const tasks = this.state.tasks.map(task => {
+      if (task.id === toggleTask.id) {
+        let status;
+        if (task.status === 'COMPLETE') {
+          status = 'INCOMPLETE';
+        }
+        else {
+          status = 'COMPLETE';
+        }
+        return { ...task, status };
+      }
+      return task;
+    })
     this.setState({ tasks });
   };
 
   onInputHandler = (todo) => {
-    if (todo == '') {
+    if (todo === '') {
       alert('Empty Task');
       return;
     }
     const lastIndex = this.state.lastIndex + 1;
-    const tasks = [...this.state.tasks];
-    tasks.push({
+    const tasks = [...this.state.tasks, {
       id: "" + lastIndex,
       name: todo,
-      status: 0,
-    });
-    const displayTasks = [...this.state.displayTasks];
-    if (this.state.view == 0 || this.state.view == 1) {
-      displayTasks.push({
-        id: "" + lastIndex,
-        name: todo,
-        status: 0,
-      });
-    }
-    this.setState({ tasks, lastIndex, displayTasks });
+      status: 'INCOMPLETE',
+    }];
+    this.setState({ tasks, lastIndex });
   }
 
   deleteTodo = (todoId, ev) => {
-    const tasks = this.state.tasks.filter(task => task.id != todoId);
-    const displayTasks = this.state.displayTasks.filter(task => task.id != todoId);
-    this.setState({ tasks, displayTasks });
+    const tasks = this.state.tasks.filter(task => task.id !== todoId);
+    this.setState({ tasks });
     ev.stopPropagation();
   };
 
   defaultView = () => {
-    const displayTasks = [...this.state.tasks];
-    const view = 0;
-    this.setState({ displayTasks, view });
+    const view = 'ALL';
+    this.setState({ view });
   }
 
   completedTasksView = () => {
-    const allTasks = [...this.state.tasks];
-    const displayTasks = allTasks.filter(task => task.status == 1)
-    const view = 2;
-    this.setState({ displayTasks, view });
+    const view = 'COMPLETE';
+    this.setState({ view });
   }
 
   incompleteTasksView = () => {
-    console.log('clicked');
-    const allTasks = [...this.state.tasks];
-    const displayTasks = allTasks.filter(task => task.status == 0)
-    const view = 1;
-    this.setState({ displayTasks, view });
+    const view = 'INCOMPLETE';
+    this.setState({ view });
   }
 
   render() {
     return (
       <div className='body'>
         <AddTask onAdd={this.onInputHandler} />
-        <Tasks toggleTask={this.onToggleComplete} onDelete={this.deleteTodo} tasks={this.state.displayTasks} />
+        <Tasks toggleTask={this.onToggleComplete} onDelete={this.deleteTodo} tasks={this.state.tasks} view={this.state.view} />
         <div className="buttonContainer">
           <button onClick={this.defaultView}>All Tasks</button>
           <button onClick={this.incompleteTasksView}>Incomplete Tasks</button>
