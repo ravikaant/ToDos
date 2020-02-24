@@ -1,0 +1,98 @@
+.body {
+    margin-top: 15px;
+    width: 80%;
+    margin: auto;
+    .taskinput {
+        display: flex;
+        .input {
+            flex-grow: 1;
+            resize: none;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        .submit {
+            background: gray;
+            margin-left: 15px;
+            border-radius: 10px;
+            width: 50px;
+        }
+        .submit:hover {
+            cursor: pointer;
+            background: rgb(153, 149, 150);
+        }
+        margin: 50px;
+    }
+    .tasklist {
+        background-color: rgb(80, 73, 74);
+        border-radius: 10px;
+        list-style-type: none;
+        padding-left: 0;
+        .task {
+            background: gray;
+            display: flex;
+            justify-content: space-between;
+            border: 1px solid;
+            border-radius: 10px;
+            margin-bottom: 2px;
+            &.complete {
+                div {
+                    text-decoration: line-through;
+                }
+            }
+            div {
+                padding: 10px 10px;
+            }
+            .delete {
+                display: none;
+                background: rgb(236, 83, 83);
+                border: 1px solid;
+                border-radius: 10px;
+                color: white;
+            }
+            .delete:hover {
+                cursor: pointer;
+            }
+        }
+        .task:hover {
+            cursor: pointer;
+            background: white;
+            .delete {
+                display: inline;
+            }
+        }
+    }
+    .page-numbers {
+        list-style-type: none;
+        .pages {
+            cursor: pointer;
+            background-color: rgb(239, 108, 128);
+            margin: 5px;
+            display: inline-block;
+            padding: 10px;
+        }
+        .active {
+            background-color: rgb(220, 215, 76);
+        }
+        .disabled {
+            background-color: rgb(153, 149, 150);
+        }
+    }
+    .filters {
+        display: flex;
+        justify-content: space-between;
+        .filter {
+            background: gray;
+            color: white;
+            padding: 10px 10px;
+            border-radius: 10px;
+            margin: auto;
+        }
+        .active {
+            background: rgb(220, 215, 76);
+        }
+        .filter:hover {
+            cursor: pointer;
+            background: rgb(153, 149, 150);
+        }
+    }
+}
