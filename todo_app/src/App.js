@@ -22,7 +22,6 @@ class App extends Component {
   };
 
   onToggleComplete = (toggleTask) => {
-    console.log(toggleTask);
     const tasks = this.state.tasks.map(task => {
       if (task.id === toggleTask.id) {
         let status;
@@ -59,17 +58,20 @@ class App extends Component {
     ev.stopPropagation();
   };
 
-  defaultView = () => {
+  defaultView = (ev) => {
+    ev.target.className = 'filter active';
     const view = 'ALL';
     this.setState({ view });
   }
 
-  completedTasksView = () => {
+  completedTasksView = (ev) => {
+    ev.target.className = 'filter active';
     const view = 'COMPLETE';
     this.setState({ view });
   }
 
-  incompleteTasksView = () => {
+  incompleteTasksView = (ev) => {
+    ev.target.className = 'filter active';
     const view = 'INCOMPLETE';
     this.setState({ view });
   }
@@ -80,9 +82,9 @@ class App extends Component {
         <AddTask onAdd={this.onInputHandler} />
         <Tasks toggleTask={this.onToggleComplete} onDelete={this.deleteTodo} tasks={this.state.tasks} view={this.state.view} />
         <div className="filters">
-          <button className='filter' onClick={this.defaultView}>All Tasks</button>
-          <button className='filter' onClick={this.incompleteTasksView}>Incomplete Tasks</button>
-          <button className='filter' onClick={this.completedTasksView}>Completed Tasks</button>
+          <button className={this.state.view === 'ALL' ? 'filter active' : 'filter'} onClick={this.defaultView}>All Tasks</button>
+          <button className={this.state.view === 'INCOMPLETE' ? 'filter active' : 'filter'} onClick={this.incompleteTasksView}>Incomplete Tasks</button>
+          <button className={this.state.view === 'COMPLETE' ? 'filter active' : 'filter'} onClick={this.completedTasksView}>Completed Tasks</button>
         </div>
       </div >
     );
