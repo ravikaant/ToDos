@@ -22,42 +22,71 @@
         }
         margin: 50px;
     }
+    h1,
+    h3 {
+        display: inline-block;
+        margin: auto auto auto auto;
+        background: rgb(140, 238, 230);
+    }
+    #dropDown {
+        display: inline;
+        margin-left: 10px;
+        padding: 10px;
+    }
+
     .tasklist {
         background-color: rgb(80, 73, 74);
         border-radius: 10px;
         list-style-type: none;
         padding-left: 0;
+        overflow: auto;
         .task {
-            background: gray;
+            background: rgb(179, 179, 179);
             display: flex;
             justify-content: space-between;
             border: 1px solid;
             border-radius: 10px;
             margin-bottom: 2px;
+            color: rgb(227, 43, 23);
+            max-height: 50px;
+            overflow: auto;
             &.complete {
                 div {
                     text-decoration: line-through;
                 }
             }
+            &.enlarged {
+                min-height: 400px;
+            }
             div {
                 padding: 10px 10px;
             }
-            .delete {
+            .taskOptions {
                 display: none;
+                position: sticky;
+                top: 0;
+                height: 100%;
+            }
+            .delete,
+            .toggleStatus {
+                display: inline;
                 background: rgb(236, 83, 83);
                 border: 1px solid;
                 border-radius: 10px;
                 color: white;
+                margin: auto auto 0 auto;
             }
-            .delete:hover {
+            .delete:hover,
+            .toggleStatus:hover {
                 cursor: pointer;
             }
         }
         .task:hover {
             cursor: pointer;
+            max-height: 300px;
             background: white;
-            .delete {
-                display: inline;
+            .taskOptions {
+                display: inline-block;
             }
         }
     }
@@ -80,6 +109,7 @@
     .filters {
         display: flex;
         justify-content: space-between;
+        margin-bottom: 30px;
         .filter {
             background: gray;
             color: white;
